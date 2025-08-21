@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type Note from '../types/note'
+import type {Note} from '../types/note'
 axios.defaults.headers.common['Authorization'] = `Bearer ${
     process.env.NEXT_PUBLIC_NOTEHUB_TOKEN
 }`

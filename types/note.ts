@@ -1,4 +1,4 @@
-export default interface Note{
+export interface Note{
     id: string,
     title: string,
     content: string,
@@ -6,3 +6,4 @@ export default interface Note{
     updatedAt: string,
     tag:string,
 }
+

@@ -10,7 +10,7 @@ interface NotePageClientProps {
 
 export default function NotePageClient({ id }: NotePageClientProps) {
     const { data, isLoading, error } = useQuery({
-        queryKey: ['notes'],
+        queryKey: ['notes', id],
         queryFn: () => getNoteById(id),
         refetchOnMount: false,
     })

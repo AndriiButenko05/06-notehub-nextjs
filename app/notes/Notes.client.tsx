@@ -27,6 +27,7 @@ export default function NotesClient() {
         queryFn: () =>
             fetchNotes(currentPage, debouncedSearchedQuery || undefined),
         placeholderData: keepPreviousData,
+        refetchOnMount: false,
     })
     const handleChange = (value: string) => {
         setCurrentPage(1)
