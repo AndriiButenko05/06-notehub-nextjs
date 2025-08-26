@@ -10,7 +10,11 @@ import { fetchNotes } from '@/lib/api'
 import { useDebounce } from 'use-debounce'
 import NoteForm from '@/components/NoteForm/NoteForm'
 
-export default function NotesClient() {
+interface NotesClientProps {
+    tag?: string
+}
+
+export default function NotesClient({ tag }: NotesClientProps) {
     const [currentPage, setCurrentPage] = useState(1)
     const [text, setText] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -23,9 +27,13 @@ export default function NotesClient() {
 
     const [debouncedSearchedQuery] = useDebounce(text, 500)
     const { data, isLoading, isError } = useQuery({
-        queryKey: ['notes', currentPage, debouncedSearchedQuery],
+        queryKey: ['notes', currentPage, debouncedSearchedQuery, tag],
         queryFn: () =>
-            fetchNotes(currentPage, debouncedSearchedQuery || undefined),
+            fetchNotes(
+                currentPage,
+                debouncedSearchedQuery || undefined,
+                tag || undefined
+            ),
         placeholderData: keepPreviousData,
         refetchOnMount: false,
     })

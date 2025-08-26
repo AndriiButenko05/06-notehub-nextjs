@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type {Note} from '../types/note'
+import type { Note } from '../types/note'
 axios.defaults.headers.common['Authorization'] = `Bearer ${
     process.env.NEXT_PUBLIC_NOTEHUB_TOKEN
 }`
@@ -11,7 +11,8 @@ interface FetchNotes {
 
 export async function fetchNotes(
     page: number,
-    query?: string
+    query?: string,
+    tag?:string
 ): Promise<FetchNotes> {
     const response = await axios.get<FetchNotes>(
         `https://notehub-public.goit.study/api/notes`,
@@ -20,6 +21,7 @@ export async function fetchNotes(
                 page,
                 perPage: 12,
                 ...(query ? { search: query } : {}),
+                  ...(tag ? { tag } : {}),
             },
         }
     )
@@ -53,3 +55,9 @@ export async function getNoteById(id: string): Promise<Note> {
     )
     return response.data
 }
+
+export const getTags = async (): Promise<string[]> => {
+  const { notes } = await fetchNotes(1);
+  const tags = Array.from(new Set(notes.map((note) => note.tag)));
+  return [...tags];
+};
