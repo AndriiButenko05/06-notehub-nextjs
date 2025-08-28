@@ -19,8 +19,8 @@ export default function TagsMenu({ tags }: Props) {
             {isOpen && (
                 <ul className={css.menuList}>
                     <li className={css.menuItem}>
-                        <Link href={`/notes/filter/all`} onClick={toggle}>
-                            All notes
+                        <Link href={`/notes/filter/All`} onClick={toggle}>
+                            All
                         </Link>
                     </li>
                     {tags.map((tag) => (

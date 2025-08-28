@@ -56,8 +56,6 @@ export async function getNoteById(id: string): Promise<Note> {
     return response.data
 }
 
-export const getTags = async (): Promise<string[]> => {
-  const { notes } = await fetchNotes(1);
-  const tags = Array.from(new Set(notes.map((note) => note.tag)));
-  return [...tags];
+export const getTags = (): string[] => {
+return ["Work", "Personal", "Meeting", "Shopping", "Todo"];
 };
